@@ -5,10 +5,9 @@ const test = tap.test;
 const Translation = require('../lib/Translator');
 const HttpSource = require('../lib/sources/HttpSource');
 const http = require('http');
-const fs = require('fs');
 
 test('should load translations from http server', (t) => {
-  t.plan(6);
+  t.plan(5);
 
   const express = require('express');
   const app = express();
@@ -35,8 +34,7 @@ test('should load translations from http server', (t) => {
         return number === 1 ? 0 : 1;
       })
       .use(new HttpSource({
-        url: `http://localhost:${port}/locales/__language__/__namespace__`,
-        filePath: __dirname + '/test.json'
+        url: `http://localhost:${port}/locales/__language__/__namespace__`
       }))
       .initialize()
       .then(() => {
@@ -64,7 +62,6 @@ test('should load translations from http server', (t) => {
           language: 'de',
           namespace: 'DE'
         }), '0 plural');
-        fs.unlink(__dirname + '/test.json', (err) => t.error(err));
       })
   });
 });

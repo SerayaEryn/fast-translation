@@ -54,8 +54,7 @@ Adds a source for translations. There are two kinds  of sources being provided:
 ```js
 const { FileSource, HttpSource } = require('fast-translation');
 const httpSource = new HttpSource({
-  url: `http://localhost:${port}/locales/__language__/__namespace__`,
-  filePath: __dirname + '/__language__-__namespace__.json'
+  url: `http://localhost:${port}/locales/__language__/__namespace__`
 });
 const fileSource = new FileSource({
   filePath: __dirname + `/locales/__language__-__namespace__.json`
