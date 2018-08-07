@@ -8,7 +8,7 @@ test('', (t) => {
   t.plan(6);
   const translations = {
     'test.title': 'singular',
-    'test.title_plural2': 'plural',
+    'test.title_plural_2': 'plural',
     'test.name_plural': 'another plural'
   };
 
@@ -54,7 +54,7 @@ test('should use default namespace', (t) => {
   t.plan(6);
   const translations = {
     'test.title': 'singular',
-    'test.title_plural2': 'plural',
+    'test.title_plural_2': 'plural',
     'test.name_plural': 'another plural'
   };
 
@@ -94,7 +94,7 @@ test('', (t) => {
   t.plan(5);
   const translations = {
     'test.title': '__count__ singular',
-    'test.title_plural2': '__count__ plural'
+    'test.title_plural_2': '__count__ plural'
   };
 
   const translation = new Translation();
@@ -135,7 +135,7 @@ test('should use source', (t) => {
   const translations = {
     test: {
       title: '__count__ singular',
-      title_plural2: '__count__ plural'
+      title_plural_2: '__count__ plural'
     }
   };
 

@@ -17,7 +17,7 @@ test('should load translations from http server', (t) => {
     res.json({
       test: {
         title: '__count__ singular',
-        title_plural2: '__count__ plural'
+        title_plural_2: '__count__ plural'
       }
     });
   });

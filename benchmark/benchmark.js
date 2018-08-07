@@ -18,7 +18,7 @@ i18next.addResourceBundle('de', 'default', {
 
 const translations = {
   'test.title': 'singular',
-  'test.title_plural2': 'plural'
+  'test.title_plural_2': 'plural'
 };
 
 const translation = new Translator();
