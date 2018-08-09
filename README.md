@@ -108,8 +108,8 @@ Reloads the translations using the sources.
 ```bash
 > node benchmark/benchmark.js
 
-i18next x 223,094 ops/sec ±1.07% (86 runs sampled)
-fast-translation x 5,473,069 ops/sec ±1.80% (86 runs sampled)
+i18next x 226,304 ops/sec ±2.35% (87 runs sampled)
+fast-translation x 5,419,834 ops/sec ±1.98% (87 runs sampled)
 Fastest is fast-translation
 ```
 

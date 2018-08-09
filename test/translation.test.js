@@ -50,6 +50,35 @@ test('', (t) => {
   }), 'another plural');
 });
 
+test('should support numeric placeholders', (t) => {
+  t.plan(2);
+  const translations = {
+    'test.cat': '__0__ cat',
+    'test.cat_plural_2': '__0__ cats'
+  };
+
+  const translation = new Translation();
+
+  translation.addRule('de', [1, 2], function (number) {
+    return number === 1 ? 0 : 1;
+  });
+
+  translation.addTranslations(translations, 'de', 'DE');
+
+  t.strictEquals(translation.translate('test.cat', {
+    language: 'de',
+    namespace: 'DE',
+    count: 1,
+    0: 1
+  }), '1 cat');
+  t.strictEquals(translation.translate('test.cat', {
+    count: 2,
+    language: 'de',
+    namespace: 'DE',
+    0: 2
+  }), '2 cats');
+});
+
 test('should use default namespace', (t) => {
   t.plan(6);
   const translations = {
