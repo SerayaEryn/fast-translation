@@ -99,9 +99,9 @@ translator.addRule('de-DE', [1, 2], (count) => count !== 1 ? 0 : 1)
 
 If no namespace is being passed it defaults to `default`. The translations may contain placeholders like `__placeholder__`.
 
-#### Translator#reload()
+#### Translator#reload([handler])
 
-Reloads the translations using the sources.
+Reloads the translations using the sources. Allows to pass a `handler` function that will be called if an error occurs.
 
 ## Benchmark
 
