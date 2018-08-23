@@ -48,9 +48,13 @@ Array of namespaces to be loaded with sources.
 
 A `number` in milliseconds that defines the interval to reload the translations.
 
+##### logger (optional)
+
+If set it will log errors during reload using the provided `logger`. Needs at least an `error()` function.
+
 #### Translator#use(source)
 
-Adds a source for translations. There are two kinds  of sources being provided:
+Adds a source for translations. There are two kind of sources being provided:
 ```js
 const { FileSource, HttpSource } = require('fast-translation');
 const httpSource = new HttpSource({
