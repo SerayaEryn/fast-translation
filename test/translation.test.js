@@ -119,7 +119,7 @@ test('should use default namespace', (t) => {
   }), 'another plural');
 });
 
-test('', (t) => {
+test('should handle interpolation', (t) => {
   t.plan(5);
   const translations = {
     'test.title': '__count__ singular',
@@ -157,6 +157,55 @@ test('', (t) => {
     language: 'de',
     namespace: 'DE'
   }), '0 plural');
+});
+
+test('should throw error on invalid translation', (t) => {
+  t.plan(2);
+  const translations = {
+    'test.title': '__${}__ singular',
+    'test.title_plural_2': '__count__ plural'
+  };
+
+  const translation = new Translation();
+
+  translation.addRule('de', [1, 2], function (number) {
+    return number === 1 ? 0 : 1;
+  });
+
+  try {
+    translation.addTranslations(translations, 'de', 'DE');
+  } catch (error) {
+    t.ok(error);
+    t.ok(error.message.includes('Failed to build translator function'))
+  }
+});
+
+test('should handle reload', (t) => {
+  t.plan(2);
+  const translation = new Translation({
+    reloadInterval: 50,
+    preloadLanguages: ['de']
+  });
+
+  translation.addRule('de', [1, 2], function (number) {
+    return number === 1 ? 0 : 1;
+  });
+  const _reload = translation._reload.bind(translation);
+  translation._reload = () => {
+    t.pass();
+    return _reload();
+  }
+
+  return translation.initialize()
+    .then(() => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          clearInterval(translation.interval)
+          t.pass();
+          resolve();
+        }, 75);
+      });
+    });
 });
 
 test('should use source', (t) => {
