@@ -30,6 +30,26 @@ translator.translate('test.key', {language: 'en-US'}); // 1 bird
 translator.translate('test.key', {language: 'en-US', count: 2}); // 2 birds
 ```
 
+## Interpolation
+
+Interpolation allows to insert values into the translations:
+
+```js 
+translator.addTranslations({
+  birds: 'a __blue__ bird'
+});
+await translator.init();
+translator.translate('birds', {language: 'en-US', color: 'blue'}) // a blue bird
+```
+
+## Keys
+
+There are three possible types of keys:
+
+1. Keys representing the singular: `key`
+2. Keys representing first plural: `key_plural`
+3. Keys representing any plural (using the numbers specified with `addRule`): `key_plural_3`
+
 ## API
 
 ### Translator(options)
