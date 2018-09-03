@@ -50,6 +50,32 @@ test('', (t) => {
   }), 'another plural');
 });
 
+test('support keys with underscore', (t) => {
+  t.plan(2);
+  const translations = {
+    'test.title_new': 'singular',
+    'test.title_new_plural_2': 'plural'
+  };
+
+  const translation = new Translation();
+
+  translation.addRule('de', [1, 2], function (number) {
+    return number === 1 ? 0 : 1;
+  });
+
+  translation.addTranslations(translations, 'de', 'DE');
+
+  t.strictEquals(translation.translate('test.title_new', {
+    language: 'de',
+    namespace: 'DE'
+  }), 'singular');
+  t.strictEquals(translation.translate('test.title_new', {
+    count: 2,
+    language: 'de',
+    namespace: 'DE'
+  }), 'plural');
+});
+
 test('should support numeric placeholders', (t) => {
   t.plan(2);
   const translations = {
