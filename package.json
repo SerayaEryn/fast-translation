@@ -6,7 +6,7 @@
   "scripts": {
     "unit": "tap test/*.test.js",
     "test": "npm run lint && npm run unit",
-    "lint": "./node_modules/eslint/bin/eslint.js lib/* test/*.test.js",
+    "lint": "standard lib/* test/*.test.js benchmark/*",
     "coveralls": "npm run unit --  --cov",
     "coverage": "npm run coveralls && tap --coverage-report=lcov",
     "benchmark": "node benchmark/benchmark.js"
@@ -16,9 +16,9 @@
   "devDependencies": {
     "benchmark": "^2.1.4",
     "coveralls": "^3.0.2",
-    "eslint": "^5.3.0",
     "express": "^4.16.3",
     "i18next": "^11.5.0",
+    "standard": "^12.0.1",
     "tap": "^12.0.1"
   },
   "repository": {
@@ -30,6 +30,8 @@
   },
   "dependencies": {
     "array.prototype.flat": "^1.2.1",
+    "generate-function": "^2.3.1",
+    "generate-object-property": "^1.2.0",
     "simple-get": "^3.0.2"
   },
   "keywords": [
