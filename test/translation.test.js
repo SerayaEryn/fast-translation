@@ -290,6 +290,44 @@ test('should use source', (t) => {
 })
 
 test('should use handler on reload()', (t) => {
+  t.plan(1)
+ 
+  const translations = {
+    test: {
+      title: '__count__ singular',
+      title_plural_2: '__count__ plural'
+    }
+  }
+
+  class TestSource {
+    load () {
+      return Promise.resolve([{
+        language: 'de',
+        namespace: 'DE',
+        translations
+      }])
+    }
+  }
+  const translation = new Translation({
+    preload: ['de']
+  })
+  return translation
+    .addRule('de', [1, 2], function (number) {
+      return number === 1 ? 0 : 1
+    })
+    .use(new TestSource())
+    .initialize()
+    .then(() => {
+      return new Promise((resolve) => {
+        translation.reload((error) => {
+          t.error(error)
+          resolve()
+        })
+      })
+    })
+})
+
+test('should use handler on reload() and handle error', (t) => {
   t.plan(4)
   class TestSource {
     load () {
