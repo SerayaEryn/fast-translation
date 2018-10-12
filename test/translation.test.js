@@ -288,3 +288,33 @@ test('should use source', (t) => {
       }), '0 plural')
     })
 })
+
+test('should use handler on reload()', (t) => {
+  t.plan(4)
+  class TestSource {
+    load () {
+      return Promise.reject(new Error('booom'))
+    }
+  }
+
+  const translation = new Translation({
+    preload: ['de']
+  })
+  return translation
+    .use(new TestSource())
+    .initialize()
+    .catch((error) => {
+      t.ok(error)
+      t.strictEquals(error.message, 'booom')
+    })
+    .then(() => {
+      return new Promise((resolve) => {
+        translation.reload((error) => {
+          t.ok(error)
+          t.strictEquals(error.message, 'booom')
+          resolve()
+        })
+      })
+    })
+})
+
