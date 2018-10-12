@@ -5,7 +5,7 @@
 [![NPM version](https://img.shields.io/npm/v/fast-translation.svg?style=flat)](https://www.npmjs.com/package/fast-translation) [![Greenkeeper badge](https://badges.greenkeeper.io/SerayaEryn/fast-translation.svg)](https://greenkeeper.io/)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-A performant and simple module for handling translations.
+A performant module for handling translations.
 
 ## Installation
 
