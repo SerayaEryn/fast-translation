@@ -218,6 +218,7 @@ test('should handle reload', (t) => {
   })
   const _reload = translation._reload.bind(translation)
   translation._reload = () => {
+    clearInterval(translation.interval)
     t.pass()
     return _reload()
   }
@@ -291,7 +292,7 @@ test('should use source', (t) => {
 
 test('should use handler on reload()', (t) => {
   t.plan(1)
- 
+
   const translations = {
     test: {
       title: '__count__ singular',
@@ -355,4 +356,3 @@ test('should use handler on reload() and handle error', (t) => {
       })
     })
 })
-
