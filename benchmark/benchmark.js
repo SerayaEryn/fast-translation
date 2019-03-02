@@ -17,8 +17,8 @@ i18next.addResourceBundle('de', 'default', {
 }, true, true)
 
 const translations = {
-  'test.title': 'singular',
-  'test.title_plural_2': 'plural'
+  'test.title': '__count__ singular',
+  'test.title_plural_2': '__count__ plural'
 }
 
 const translation = new Translator()
