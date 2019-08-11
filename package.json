@@ -1,6 +1,6 @@
 {
   "name": "fast-translation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A performant and simple module for handling translations.",
   "main": "lib/FastTranslation.js",
   "scripts": {
