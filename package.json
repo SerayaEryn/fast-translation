@@ -29,7 +29,6 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
-    "array.prototype.flat": "^1.2.1",
     "generate-function": "^2.3.1",
     "generate-object-property": "^1.2.0",
     "simple-get": "^3.0.2"
