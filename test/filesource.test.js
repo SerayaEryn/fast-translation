@@ -17,7 +17,7 @@ test('should load translation from file', (t) => {
       return number === 1 ? 0 : 1
     })
     .use(new FileSource({
-      filePath: path.join(__dirname, `/locales/__language_____namespace__.json`)
+      filePath: path.join(__dirname, '/locales/__language_____namespace__.json')
     }))
     .initialize()
     .then(() => {
@@ -59,7 +59,7 @@ test('Should reject on missing file', (t) => {
       return number === 1 ? 0 : 1
     })
     .use(new FileSource({
-      filePath: path.join(__dirname, `/locales/__language_____namespace__.json`)
+      filePath: path.join(__dirname, '/locales/__language_____namespace__.json')
     }))
     .initialize()
     .catch((err) => {
@@ -79,7 +79,7 @@ test('Should reject on invalid json file', (t) => {
       return number === 1 ? 0 : 1
     })
     .use(new FileSource({
-      filePath: path.join(__dirname, `/locales/__language_____namespace__.json`)
+      filePath: path.join(__dirname, '/locales/__language_____namespace__.json')
     }))
     .initialize()
     .catch((err) => {
