@@ -39,5 +39,8 @@
     "localization",
     "i18n",
     "translate"
+  ],
+  "files": [
+    "lib"
   ]
 }
