@@ -4,22 +4,23 @@
   "description": "A performant and simple module for handling translations.",
   "main": "lib/FastTranslation.js",
   "scripts": {
-    "unit": "tap test/*.test.js",
+    "unit": "ava test/*.test.js",
     "test": "npm run lint && npm run unit",
     "lint": "standard lib/* test/*.test.js benchmark/*",
-    "coveralls": "npm run unit --  --cov",
-    "coverage": "npm run coveralls && tap --coverage-report=lcov",
+    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc npm test && nyc report --reporter=html",
     "benchmark": "node benchmark/benchmark.js"
   },
   "author": "Denis Fäcke",
   "license": "MIT",
   "devDependencies": {
+    "ava": "^2.4.0",
     "benchmark": "^2.1.4",
     "coveralls": "^3.0.2",
     "express": "^4.16.3",
     "i18next": "^17.0.0",
-    "standard": "^13.0.1",
-    "tap": "^14.0.0"
+    "nyc": "^14.1.1",
+    "standard": "^13.0.1"
   },
   "repository": {
     "type": "git",

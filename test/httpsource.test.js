@@ -1,12 +1,11 @@
 'use strict'
 
-const tap = require('tap')
-const test = tap.test
+const test = require('ava')
 const Translation = require('../lib/Translator')
 const HttpSource = require('../lib/sources/HttpSource')
 const http = require('http')
 
-test('should load translations from http server', (t) => {
+test.cb('should load translations from http server', (t) => {
   t.plan(5)
 
   const express = require('express')
@@ -39,34 +38,35 @@ test('should load translations from http server', (t) => {
       .initialize()
       .then(() => {
         server.unref()
-        t.strictEquals(translation.translate('unknown.key', {
+        t.is(translation.translate('unknown.key', {
           language: 'de',
           namespace: 'DE'
         }), 'unknown.key')
-        t.strictEquals(translation.translate('test.title', {
+        t.is(translation.translate('test.title', {
           language: 'de',
           namespace: 'DE'
         }), 'undefined singular')
-        t.strictEquals(translation.translate('test.title', {
+        t.is(translation.translate('test.title', {
           count: 1,
           language: 'de',
           namespace: 'DE'
         }), '1 singular')
-        t.strictEquals(translation.translate('test.title', {
+        t.is(translation.translate('test.title', {
           count: 2,
           language: 'de',
           namespace: 'DE'
         }), '2 plural')
-        t.strictEquals(translation.translate('test.title', {
+        t.is(translation.translate('test.title', {
           count: 0,
           language: 'de',
           namespace: 'DE'
         }), '0 plural')
+        t.end()
       })
   })
 })
 
-test('', (t) => {
+test.cb('should handle server error', (t) => {
   t.plan(1)
 
   const express = require('express')
@@ -95,12 +95,13 @@ test('', (t) => {
       .initialize()
       .catch((err) => {
         server.unref()
-        t.ok(err)
+        t.truthy(err)
+        t.end()
       })
   })
 })
 
-test('Should reject on invalid json', (t) => {
+test.cb('Should reject on invalid json', (t) => {
   t.plan(1)
 
   const express = require('express')
@@ -128,7 +129,8 @@ test('Should reject on invalid json', (t) => {
       .initialize()
       .catch((err) => {
         server.unref()
-        t.ok(err)
+        t.truthy(err)
+        t.end()
       })
   })
 })
