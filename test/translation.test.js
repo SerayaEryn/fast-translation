@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('ava')
-const Translation = require('../lib/Translator')
+const Translation = require('..').Translator
 
 test('should translate', (t) => {
   t.plan(6)

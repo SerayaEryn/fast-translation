@@ -2,7 +2,7 @@
 
 const test = require('ava')
 const Translation = require('../lib/Translator')
-const HttpSource = require('../lib/sources/HttpSource')
+const HttpSource = require('..').HttpSource
 const http = require('http')
 
 test.cb('should load translations from http server', (t) => {

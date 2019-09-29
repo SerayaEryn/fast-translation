@@ -2,7 +2,7 @@
 
 const test = require('ava')
 const Translation = require('../lib/Translator')
-const FileSource = require('../lib/sources/FileSource')
+const FileSource = require('..').FileSource
 const path = require('path')
 
 test('should load translation from file', (t) => {
