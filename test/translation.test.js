@@ -1,10 +1,9 @@
 'use strict'
 
-const tap = require('tap')
-const test = tap.test
-const Translation = require('../lib/Translator')
+const test = require('ava')
+const Translation = require('..').Translator
 
-test('', (t) => {
+test('should translate', (t) => {
   t.plan(6)
   const translations = {
     'test.title': 'singular',
@@ -20,30 +19,30 @@ test('', (t) => {
 
   translation.addTranslations(translations, 'de', 'DE')
 
-  t.strictEquals(translation.translate('unknown.key', {
+  t.is(translation.translate('unknown.key', {
     language: 'de',
     namespace: 'DE'
   }), 'unknown.key')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     language: 'de',
     namespace: 'DE'
   }), 'singular')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     count: 1,
     language: 'de',
     namespace: 'DE'
   }), 'singular')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     count: 2,
     language: 'de',
     namespace: 'DE'
   }), 'plural')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     count: 0,
     language: 'de',
     namespace: 'DE'
   }), 'plural')
-  t.strictEquals(translation.translate('test.name', {
+  t.is(translation.translate('test.name', {
     count: 2,
     language: 'de',
     namespace: 'DE'
@@ -65,11 +64,11 @@ test('support keys with underscore', (t) => {
 
   translation.addTranslations(translations, 'de', 'DE')
 
-  t.strictEquals(translation.translate('test.title_new', {
+  t.is(translation.translate('test.title_new', {
     language: 'de',
     namespace: 'DE'
   }), 'singular')
-  t.strictEquals(translation.translate('test.title_new', {
+  t.is(translation.translate('test.title_new', {
     count: 2,
     language: 'de',
     namespace: 'DE'
@@ -91,13 +90,13 @@ test('should support numeric placeholders', (t) => {
 
   translation.addTranslations(translations, 'de', 'DE')
 
-  t.strictEquals(translation.translate('test.cat', {
+  t.is(translation.translate('test.cat', {
     language: 'de',
     namespace: 'DE',
     count: 1,
     0: 1
   }), '1 cat')
-  t.strictEquals(translation.translate('test.cat', {
+  t.is(translation.translate('test.cat', {
     count: 2,
     language: 'de',
     namespace: 'DE',
@@ -121,25 +120,25 @@ test('should use default namespace', (t) => {
 
   translation.addTranslations(translations, 'de')
 
-  t.strictEquals(translation.translate('unknown.key', {
+  t.is(translation.translate('unknown.key', {
     language: 'de'
   }), 'unknown.key')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     language: 'de'
   }), 'singular')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     count: 1,
     language: 'de'
   }), 'singular')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     count: 2,
     language: 'de'
   }), 'plural')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     count: 0,
     language: 'de'
   }), 'plural')
-  t.strictEquals(translation.translate('test.name', {
+  t.is(translation.translate('test.name', {
     count: 2,
     language: 'de'
   }), 'another plural')
@@ -160,25 +159,25 @@ test('should handle interpolation', (t) => {
 
   translation.addTranslations(translations, 'de', 'DE')
 
-  t.strictEquals(translation.translate('unknown.key', {
+  t.is(translation.translate('unknown.key', {
     language: 'de',
     namespace: 'DE'
   }), 'unknown.key')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     language: 'de',
     namespace: 'DE'
   }), 'undefined singular')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     count: 1,
     language: 'de',
     namespace: 'DE'
   }), '1 singular')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     count: 2,
     language: 'de',
     namespace: 'DE'
   }), '2 plural')
-  t.strictEquals(translation.translate('test.title', {
+  t.is(translation.translate('test.title', {
     count: 0,
     language: 'de',
     namespace: 'DE'
@@ -201,8 +200,8 @@ test('should throw error on invalid translation', (t) => {
   try {
     translation.addTranslations(translations, 'de', 'DE')
   } catch (error) {
-    t.ok(error)
-    t.ok(error.message.includes('Failed to build translator function'))
+    t.truthy(error)
+    t.truthy(error.message.includes('Failed to build translator function'))
   }
 })
 
@@ -257,32 +256,32 @@ test('should use source', (t) => {
   const translation = new Translation({
     preload: ['de']
   })
-  translation
+  return translation
     .addRule('de', [1, 2], function (number) {
       return number === 1 ? 0 : 1
     })
     .use(new TestSource())
     .initialize()
     .then(() => {
-      t.strictEquals(translation.translate('unknown.key', {
+      t.is(translation.translate('unknown.key', {
         language: 'de',
         namespace: 'DE'
       }), 'unknown.key')
-      t.strictEquals(translation.translate('test.title', {
+      t.is(translation.translate('test.title', {
         language: 'de',
         namespace: 'DE'
       }), 'undefined singular')
-      t.strictEquals(translation.translate('test.title', {
+      t.is(translation.translate('test.title', {
         count: 1,
         language: 'de',
         namespace: 'DE'
       }), '1 singular')
-      t.strictEquals(translation.translate('test.title', {
+      t.is(translation.translate('test.title', {
         count: 2,
         language: 'de',
         namespace: 'DE'
       }), '2 plural')
-      t.strictEquals(translation.translate('test.title', {
+      t.is(translation.translate('test.title', {
         count: 0,
         language: 'de',
         namespace: 'DE'
@@ -321,7 +320,7 @@ test('should use handler on reload()', (t) => {
     .then(() => {
       return new Promise((resolve) => {
         translation.reload((error) => {
-          t.error(error)
+          t.falsy(error)
           resolve()
         })
       })
@@ -343,14 +342,14 @@ test('should use handler on reload() and handle error', (t) => {
     .use(new TestSource())
     .initialize()
     .catch((error) => {
-      t.ok(error)
-      t.strictEquals(error.message, 'booom')
+      t.truthy(error)
+      t.is(error.message, 'booom')
     })
     .then(() => {
       return new Promise((resolve) => {
         translation.reload((error) => {
-          t.ok(error)
-          t.strictEquals(error.message, 'booom')
+          t.truthy(error)
+          t.is(error.message, 'booom')
           resolve()
         })
       })

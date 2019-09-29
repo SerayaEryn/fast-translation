@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "benchmark": "^2.1.4",
+    "i18next": "^17.0.0"
+  }
+}

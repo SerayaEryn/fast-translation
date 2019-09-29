@@ -1,6 +1,6 @@
 # fast-translation
 
-[![Build Status](https://travis-ci.org/SerayaEryn/fast-translation.svg?branch=master)](https://travis-ci.org/SerayaEryn/fast-translation)
+![Build Status](https://github.com/SerayaEryn/fast-translation/workflows/ci/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/SerayaEryn/fast-translation/badge.svg?branch=master)](https://coveralls.io/github/SerayaEryn/fast-translation?branch=master)
 [![NPM version](https://img.shields.io/npm/v/fast-translation.svg?style=flat)](https://www.npmjs.com/package/fast-translation) [![Greenkeeper badge](https://badges.greenkeeper.io/SerayaEryn/fast-translation.svg)](https://greenkeeper.io/)
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)

@@ -1,12 +1,11 @@
 'use strict'
 
-const tap = require('tap')
-const test = tap.test
+const test = require('ava')
 const Translation = require('../lib/Translator')
-const FileSource = require('../lib/sources/FileSource')
+const FileSource = require('..').FileSource
 const path = require('path')
 
-test('should laod translation from file', (t) => {
+test('should load translation from file', (t) => {
   t.plan(5)
 
   const translation = new Translation({
@@ -18,29 +17,29 @@ test('should laod translation from file', (t) => {
       return number === 1 ? 0 : 1
     })
     .use(new FileSource({
-      filePath: path.join(__dirname, `/locales/__language_____namespace__.json`)
+      filePath: path.join(__dirname, '/locales/__language_____namespace__.json')
     }))
     .initialize()
     .then(() => {
-      t.strictEquals(translation.translate('unknown.key', {
+      t.is(translation.translate('unknown.key', {
         language: 'de',
         namespace: 'DE'
       }), 'unknown.key')
-      t.strictEquals(translation.translate('test.title', {
+      t.is(translation.translate('test.title', {
         language: 'de',
         namespace: 'DE'
       }), 'undefined singular')
-      t.strictEquals(translation.translate('test.title', {
+      t.is(translation.translate('test.title', {
         count: 1,
         language: 'de',
         namespace: 'DE'
       }), '1 singular')
-      t.strictEquals(translation.translate('test.title', {
+      t.is(translation.translate('test.title', {
         count: 2,
         language: 'de',
         namespace: 'DE'
       }), '2 plural')
-      t.strictEquals(translation.translate('test.title', {
+      t.is(translation.translate('test.title', {
         count: 0,
         language: 'de',
         namespace: 'DE'
@@ -60,11 +59,11 @@ test('Should reject on missing file', (t) => {
       return number === 1 ? 0 : 1
     })
     .use(new FileSource({
-      filePath: path.join(__dirname, `/locales/__language_____namespace__.json`)
+      filePath: path.join(__dirname, '/locales/__language_____namespace__.json')
     }))
     .initialize()
     .catch((err) => {
-      t.ok(err)
+      t.truthy(err)
     })
 })
 
@@ -80,10 +79,10 @@ test('Should reject on invalid json file', (t) => {
       return number === 1 ? 0 : 1
     })
     .use(new FileSource({
-      filePath: path.join(__dirname, `/locales/__language_____namespace__.json`)
+      filePath: path.join(__dirname, '/locales/__language_____namespace__.json')
     }))
     .initialize()
     .catch((err) => {
-      t.ok(err)
+      t.truthy(err)
     })
 })
