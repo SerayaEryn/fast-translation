@@ -24,7 +24,7 @@
     "url": "git+https://github.com/SerayaEryn/fast-translation.git"
   },
   "engines": {
-    "node": ">=8.0.0"
+    "node": ">=10.13.0"
   },
   "dependencies": {
     "generate-function": "^2.3.1",
