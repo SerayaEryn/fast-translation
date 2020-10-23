@@ -17,7 +17,7 @@
     "ava": "^3.0.0",
     "express": "^4.16.3",
     "nyc": "^15.0.0",
-    "standard": "^14.0.0"
+    "standard": "^15.0.0"
   },
   "repository": {
     "type": "git",
