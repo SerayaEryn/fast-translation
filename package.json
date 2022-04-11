@@ -14,7 +14,7 @@
   "author": "Denis Fäcke",
   "license": "MIT",
   "devDependencies": {
-    "ava": "^3.0.0",
+    "ava": "^4.2.0",
     "express": "^4.16.3",
     "nyc": "^15.0.0",
     "standard": "^15.0.0"
